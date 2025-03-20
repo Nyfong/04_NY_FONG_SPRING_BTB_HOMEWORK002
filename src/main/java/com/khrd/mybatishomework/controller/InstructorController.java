@@ -49,9 +49,9 @@ public class InstructorController {
     @DeleteMapping("/{instructor-id}")
     public ResponseEntity<?> deleteInstructorByid(@PathVariable("instructor-id") Integer instructorId) {
 
-        int deleteInstructorsById = instructorService.deleteInstructorById(instructorId);
+        Integer deleteInstructorsById = instructorService.deleteInstructorById(instructorId);
 
-        ApiResponse<?> response = ApiResponse.<Integer>builder().timestamp(LocalDateTime.now()).message("sucesfully delete instructors by id").status(HttpStatus.OK).payload(deleteInstructorsById).build();
+        ApiResponse<?> response = ApiResponse.<Integer>builder().timestamp(LocalDateTime.now()).message("The instructor has been successfully removed").status(HttpStatus.OK).payload(deleteInstructorsById).build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -61,15 +61,15 @@ public class InstructorController {
     @PutMapping("/{instructor-id}")
     public ResponseEntity<ApiResponse<List<Instructors>>> editInstructorById(@PathVariable("instructor-id") Integer instructorId, @RequestBody InstructorRequest instructorRequest ) {
         List<Instructors> editInstructorById = instructorService.editInstructorById(instructorId, instructorRequest);
-        ApiResponse<List<Instructors>> response = ApiResponse.<List<Instructors>>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").status(HttpStatus.OK).payload(editInstructorById).build();
+        ApiResponse<List<Instructors>> response = ApiResponse.<List<Instructors>>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").status(HttpStatus.OK).build();
         return  new ResponseEntity<>(response, HttpStatus.OK);
     }
     //post
     @Operation(summary = "Create  Instructors ")
     @PostMapping
-    public ResponseEntity<ApiResponse<List<Instructors>>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
-        List<Instructors> createInstructor = instructorService.createInstructor(instructorRequest);
-        ApiResponse<List<Instructors>> response = ApiResponse.<List<Instructors>>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").status(HttpStatus.OK).build();
+    public ResponseEntity<ApiResponse<Instructors>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
+        Instructors createInstructor = instructorService.createInstructor(instructorRequest);
+        ApiResponse<Instructors> response = ApiResponse.<Instructors>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").payload(createInstructor).status(HttpStatus.CREATED).build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }

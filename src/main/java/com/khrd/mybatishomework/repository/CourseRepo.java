@@ -10,7 +10,11 @@ import java.util.List;
 @Mapper
 public interface CourseRepo {
 
-    @Select("select * from courses;")
+    @Select("""
+            select * from courses
+                 offset #{size} *(#{page}-1) 
+                  limit #{size};            
+                 """)
     @Results(id = "courseMapper", value = {
             @Result(property = "courseId", column = "course_id"),
             @Result(property = "courseName", column = "course_name"),
@@ -19,7 +23,7 @@ public interface CourseRepo {
                     one = @One(select = "com.khrd.mybatishomework.repository.InstructorRepo.getInstructorById")
             )
     })
-    List<Courses> getAllCourseService();
+    List<Courses> getAllCourseService( Integer page,  Integer size);
 
     // --
     @Select("select * from courses where  course_id = #{courseId};")
@@ -47,10 +51,10 @@ public interface CourseRepo {
 
 
 
-    @Select("update courses set #{courseName}, #{description}, #{instructorId}) where course_id = #{courseId} ")
+    @Select("update courses set course_name = #{CourseRequest.courseName}, description = #{CourseRequest.description}, instructor_id = #{CourseRequest.instructorId} where course_id = #{courseId} returning * ;")
     @ResultMap("courseMapper")
         //-- will implemenent here
-    Courses editCourseService(CourseRequest courseRequest);
+    Courses editCourseService(@Param("CourseRequest") CourseRequest courseRequest, Integer courseId);
 
 
     //

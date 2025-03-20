@@ -36,12 +36,12 @@ public interface InstructorRepo {
 
     @Select(" delete from instructors where instructor_id = #{instructorId} ")
     @ResultMap("instructorMapper")
-    int deleteInstructorById(Integer instructorId);
+    Integer deleteInstructorById(Integer instructorId);
 
     //--
-    @Select("insert into instructors values (default, #{instructorName}, #{email}); ")
+    @Select("insert into instructors values (default, #{instructorName}, #{email}) returning  * ; ")
     @ResultMap("instructorMapper")
-    List<Instructors> createInstructor(InstructorRequest instructorRequest);
+    Instructors createInstructor(InstructorRequest instructorRequest);
 
 
     //--

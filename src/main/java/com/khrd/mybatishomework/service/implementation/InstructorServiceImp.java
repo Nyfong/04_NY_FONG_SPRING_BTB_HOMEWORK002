@@ -39,7 +39,7 @@ public class InstructorServiceImp implements InstructorService {
     }
 
     @Override
-    public int deleteInstructorById(Integer instructorId) {
+    public Integer deleteInstructorById(Integer instructorId) {
         if (instructorRepo.countInstructorById(instructorId)>0)
         {
             return instructorRepo.deleteInstructorById(instructorId);
@@ -48,7 +48,7 @@ public class InstructorServiceImp implements InstructorService {
     }
 
     @Override
-    public List<Instructors> createInstructor(InstructorRequest instructorRequest) {
+    public Instructors createInstructor(InstructorRequest instructorRequest) {
         return instructorRepo.createInstructor(instructorRequest);
     }
 

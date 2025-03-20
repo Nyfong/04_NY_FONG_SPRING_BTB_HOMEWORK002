@@ -14,9 +14,9 @@ public interface InstructorService {
 
     Instructors getInstructorById(Integer instructorId);
 
-    int deleteInstructorById(Integer instructorId);
+    Integer deleteInstructorById(Integer instructorId);
 
-    List<Instructors> createInstructor(InstructorRequest instructorRequest);
+    Instructors createInstructor(InstructorRequest instructorRequest);
 
     List<Instructors> editInstructorById(Integer instructorId, InstructorRequest instructorRequest);
 }

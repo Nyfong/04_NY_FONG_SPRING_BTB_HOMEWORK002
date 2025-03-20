@@ -13,5 +13,4 @@ public class Students {
     private String studentEmail;
     private String phoneNumber;
     private Courses courses;
-
 }

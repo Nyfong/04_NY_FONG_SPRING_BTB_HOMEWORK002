@@ -23,8 +23,8 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public List<Courses> getAllCourseService() {
-        return courseRepo.getAllCourseService();
+    public List<Courses> getAllCourseService( Integer page, Integer size) {
+        return courseRepo.getAllCourseService(page, size);
     }
 
     @Override
@@ -42,7 +42,6 @@ public class CourseServiceImp implements CourseService {
             return courseRepo.delteCourseByIdService(courseId);
         }
         throw new NotFoundExceptionHandler("delteCourseByIdService with " + courseId + " Not Found");
-
     }
 
     @Override
@@ -53,11 +52,11 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public Courses editCourseService(CourseRequest courseRequest) {
+    public Courses editCourseService(CourseRequest courseRequest , Integer courseId) {
 
         //find instructor id first
         instructorService.getInstructorById(courseRequest.getInstructorId());
-        return courseRepo.editCourseService(courseRequest);
+        return courseRepo.editCourseService(courseRequest , courseId);
 
     }
 

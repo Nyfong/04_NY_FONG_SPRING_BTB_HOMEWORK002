@@ -25,8 +25,8 @@ public class CourseController {
     //get all courses
     @Operation(summary = "Get All courses")
     @GetMapping("/")
-    public ResponseEntity<?> getAllCourses() {
-        List<Courses> getAllCourse = courseService.getAllCourseService();
+    public ResponseEntity<?> getAllCourses(@RequestParam (defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+        List<Courses> getAllCourse = courseService.getAllCourseService(page,size);
         ApiResponse<List<Courses>> response = ApiResponse.<List<Courses>>builder().timestamp(LocalDateTime.now()).message("retrive all course").status(HttpStatus.OK).payload(getAllCourse).build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -68,10 +68,10 @@ public class CourseController {
     //Update course
     @Operation(summary = "create courses " )
     @PutMapping("/{course-id}")
-    public ResponseEntity<?> editCourses(@RequestBody CourseRequest courseRequest) {
-        Courses createCourse = courseService.editCourseService(courseRequest);
+    public ResponseEntity<?> editCourses(@PathVariable("course-id") Integer courseId,@RequestBody CourseRequest courseRequest) {
+        Courses createCourse = courseService.editCourseService(courseRequest, courseId);
 
-        ApiResponse<Courses> response = ApiResponse.<Courses>builder().timestamp(LocalDateTime.now()).message("The course has been successfully added.").status(HttpStatus.CREATED).payload(createCourse).build();
+        ApiResponse<Courses> response = ApiResponse.<Courses>builder().timestamp(LocalDateTime.now()).message("The course has been successfully added.").status(HttpStatus.OK).payload(createCourse).build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
