@@ -51,7 +51,7 @@ public interface CourseRepo {
 
 
 
-    @Select("update courses set course_name = #{CourseRequest.courseName}, description = #{CourseRequest.description}, instructor_id = #{CourseRequest.instructorId} where course_id = #{courseId} returning * ;")
+    @Select("update courses set course_name = #{CourseRequest.courseName}, description = #{CourseRequest.description}, instructor_id = #{CourseRequest.instructorId} where course_id = #{courseId}  ;")
     @ResultMap("courseMapper")
         //-- will implemenent here
     Courses editCourseService(@Param("CourseRequest") CourseRequest courseRequest, Integer courseId);
