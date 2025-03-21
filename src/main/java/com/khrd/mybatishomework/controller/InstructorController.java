@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/instructors")
+@RequestMapping("/api/v1/instructors")
 public class InstructorController {
     //Di
     private final InstructorService instructorService;
@@ -64,6 +64,7 @@ public class InstructorController {
         ApiResponse<List<Instructors>> response = ApiResponse.<List<Instructors>>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").status(HttpStatus.OK).build();
         return  new ResponseEntity<>(response, HttpStatus.OK);
     }
+
     //post
     @Operation(summary = "Create  Instructors ")
     @PostMapping

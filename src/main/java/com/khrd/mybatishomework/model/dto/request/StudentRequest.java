@@ -1,5 +1,6 @@
-package com.khrd.mybatishomework.model.entity;
+package com.khrd.mybatishomework.model.dto.request;
 
+import com.khrd.mybatishomework.model.entity.Courses;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,12 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Students {
-    private Integer studentId;
+@AllArgsConstructor
+public class StudentRequest {
     private String studentName;
     private String studentEmail;
     private String phoneNumber;
-    List <Courses> courses;
+    private List<Integer> courseId;
 }

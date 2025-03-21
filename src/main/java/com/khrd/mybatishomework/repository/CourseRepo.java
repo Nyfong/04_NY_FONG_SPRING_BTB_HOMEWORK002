@@ -64,4 +64,11 @@ public interface CourseRepo {
     //find id of instructer
     @Select("select COUNT(*) from instructors where  instructor_id = #{instructorId} ")
     Integer findInstructorIdByCourseId(CourseRequest courseRequest);
+
+
+
+    //-- mehtod
+    @Select("select c.* from courses c inner join student_course sc on  c.course_id = sc.course_id where sc.student_id = #{studentId};")
+    @ResultMap("courseMapper")
+    List<Courses> getAllCourseByStudentId(Integer studentId);
 }
